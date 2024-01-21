@@ -58,7 +58,7 @@ void quickSort(int *arr, int l, int r)
 
 int main()
 {
-    // freopen("input6.txt", "r", stdin);
+    freopen("input6.txt", "r", stdin);
     int n;
     cin >> n;
 
