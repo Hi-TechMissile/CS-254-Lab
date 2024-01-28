@@ -4,34 +4,24 @@ using namespace std;
 
 using i64 = long long;
 
-void add(vector<vector<i64>> A, vector<vector<i64>> B, vector<vector<i64>> &C, int split_index)
+void add(const vector<vector<i64>>& A, const vector<vector<i64>>& B, vector<vector<i64>>& C, int split_index)
 {
     for (auto i = 0; i < split_index; i++)
         for (auto j = 0; j < split_index; j++)
             C[i][j] = A[i][j] + B[i][j];
 }
 
-vector<vector<i64>> multiply(vector<vector<i64>> A, vector<vector<i64>> B)
+vector<vector<i64>> multiply(const vector<vector<i64>>& A, const vector<vector<i64>>& B)
 {
-    int col_1 = A[0].size();
-    int row_1 = A.size();
-    int col_2 = B[0].size();
-    int row_2 = B.size();
+    int n = A.size();
+    vector<i64> result_matrix_row(n);
+    vector<vector<i64>> result_matrix(n, result_matrix_row);
 
-    if (col_1 != row_2)
-    {
-        cout << "\nMatrices A and B are incompatible for multiplication.\n";
-        return {};
-    }
-
-    vector<i64> result_matrix_row(col_2, 0);
-    vector<vector<i64>> result_matrix(row_1, result_matrix_row);
-
-    if (col_1 == 1)
+    if (n == 1)
         result_matrix[0][0] = A[0][0] * B[0][0];
     else
     {
-        int split_index = col_1 / 2;
+        int split_index = n / 2;
 
         vector<i64> row(split_index, 0);
         vector<vector<i64>> res_top_left(split_index, row);
@@ -94,11 +84,12 @@ vector<vector<i64>> multiply(vector<vector<i64>> A, vector<vector<i64>> B)
 int main()
 {
     // file IO
-    freopen("input2.txt", "r", stdin);
-    freopen("output2.txt", "w", stdout);
+    freopen("input1.txt", "r", stdin);
+    freopen("output1.txt", "w", stdout);
 
     int n;
     cin>>n;
+
     vector<vector<i64>> A(n, vector<i64>(n)), B(n, vector<i64>(n));
     for (int i = 0; i < n; ++i)
     {
@@ -112,9 +103,7 @@ int main()
             cin>>B[i][j];
     }
 
-    
-
-    vector<vector<i64>> result_matrix = /* multiply(A, B); */A;
+    vector<vector<i64>> result_matrix(multiply(A, B));
     for (int i = 0; i < n; ++i)
     {
         for (int j = 0; j < n; ++j)
