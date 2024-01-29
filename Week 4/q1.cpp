@@ -1,5 +1,5 @@
 // Assumptions: all array elements are integer values, and have an upperbound of 2^31 - 1.
-// example: nums = [3, 2, 1, 5, 6, 4], number of inversions = 5
+// example: nums = [3, 2, 1, 5, 6, 4], number of inversions = 5.
 
 #include <iostream>
 #include <vector>
