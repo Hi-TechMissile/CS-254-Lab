@@ -1,63 +1,71 @@
 #include <iostream>
 #include <vector>
 #include <iomanip>
+#include <algorithm>
 using namespace std;
+
+int kthElement(vector<int> &nums1, vector<int> &nums2, const int &k)
+{
+    const int m = nums1.size(), n = nums2.size();
+    int l = 0, u = m - 1, mid;
+
+    while (l <= u)
+    {
+        mid = l + (u - l) / 2;
+        int tmp = lower_bound(nums2.begin(), nums2.end(), nums1[mid]) - nums2.begin();
+        int cnt = tmp + mid;
+
+        if (cnt == k - 1)
+            return nums1[mid];
+
+        if (cnt < k - 1)
+            l = ++mid;
+
+        else
+            u = --mid;
+    }
+
+    l = 0, u = n - 1;
+    while (l <= u)
+    {
+        mid = l + (u - l) / 2;
+        int tmp = upper_bound(nums1.begin(), nums1.end(), nums2[mid]) - nums1.begin();
+        int cnt = tmp + mid;
+
+        if (cnt == k - 1)
+            return nums2[mid];
+
+        if (cnt < k - 1)
+            l = ++mid;
+
+        else
+            u = --mid;
+    }
+
+    return -1;
+}
 
 int main()
 {
     // file IO
     freopen("input2.txt", "r", stdin);
 
-    int m, n;
-    cin>>m>>n;
-
-    int first_pointer = 0, second_pointer = 0, result_pointer = 0;
-    vector<int> nums1(m), nums2(n), num(n + m);
-    for (int first_pointer = 0; first_pointer < m; ++first_pointer)
-        cin>>nums1[first_pointer];
+    int n, m;
+    cin >> m >> n;
+    vector<int> nums1(m), nums2(n);
+    for (int& num : nums1)
+        cin >> num;
     
-    for (int first_pointer = 0; first_pointer < n; ++first_pointer)
-        cin>>nums2[first_pointer];
+    for (int& num : nums2)
+        cin >> num;
+
+    cout << "\nThe median of the two sorted arrays is: ";
+    if ((n + m) % 2 != 0)
+        cout << kthElement(nums1, nums2, (n + m + 1) / 2) << "\n";
     
-    while (first_pointer < m && second_pointer < n)
-    {
-        if (nums1[first_pointer] <= nums2[second_pointer])
-        {
-            num[result_pointer] = nums1[first_pointer];
-            ++first_pointer;
-        }
-
-        else 
-        {
-            num[result_pointer] = nums2[second_pointer];
-            ++second_pointer;
-        }
-        ++result_pointer;
-    }
-
-    while (first_pointer < m)
-    {
-        num[result_pointer] = nums1[first_pointer];
-        ++first_pointer;
-        ++result_pointer;
-    }
-
-    while (second_pointer < n)
-    {
-        num[result_pointer] = nums2[second_pointer];
-        ++second_pointer;
-        ++result_pointer;
-    }
-
-    cout<<"\nThe median of the two arrays is: ";
-    if ((n + m) % 2)
-        cout<<num[(n + m) / 2]<<"\n";
-    
-    else 
-        cout<<setprecision(15)<<(long double)(num[(n + m) / 2] + num[(n + m) / 2 - 1]) / 2.0<<"\n";
-    
-    return 0;
+    else
+        cout << setprecision(15) << (double)(kthElement(nums1, nums2, (n + m) / 2 + 1) + kthElement(nums1, nums2, (n + m) / 2)) / 2 << "\n";
 }
 
-// Time complexity: O(n + m).
-// Space complexity: O(n + m) auxiliary space.
+// Time complexity: O(log(n) * log(m)) in the worst case
+// Space complexity: O(1) - constant space
