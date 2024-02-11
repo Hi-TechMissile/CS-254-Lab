@@ -70,6 +70,7 @@ int main()
     for (int t = 1; t < test_cases + 1; ++t) {
         int n;
         cin >> n;
+        cout << n << "\n";
 
         vector<vector<int>> board(n, vector<int>(n));
         for (int i = 0; i < n; ++i)
