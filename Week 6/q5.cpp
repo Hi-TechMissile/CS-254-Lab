@@ -41,7 +41,7 @@ void DFS(vector<vector<int>>& adj, int u, vector<bool>& visited, vector<int>& vi
 }
 
 int main() {
-    freopen("input5.txt", "r", stdin);
+    // freopen("input5.txt", "r", stdin);
 
     int N, M;
     cin >> N >> M;
@@ -60,10 +60,14 @@ int main() {
 
     if (contains_articulation_point) {
         cout << "The given graph consists of one or more articulation points.\n";  
+    } else {
+        cout << "The given graph DOES NOT contain any articulation points.\n";
     }
 
     if (contains_bridge) {
         cout << "The given graph consists of one or more bridges.\n";
+    } else {
+        cout << "The graph does not contain any bridges.\n";
     }
     
     cout << "\n";
