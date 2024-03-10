@@ -1,12 +1,14 @@
 # CS-254-Lab
 
-This repository consists of my assignment submissions of the CS 254 - Design and Analysis of Algorithms Lab.<br>
-Roll: 220001052<br>
-Name: P C Uma Mahesh<br>
+$\text{This repository consists of my assignment submissions of the CS 254-Design and Analysis of Algorithms Lab.}$ <br>
+$\text{Roll: 220001052}$ <br>
+$\text{Name: P C Uma Mahesh}$ <br>
+
+<br>
 
 ## Running C++ code
 
-Any C++ code can be run from source files in my submissions as under:
+$\text{Any C++ code can be run from source files in my submissions as under:}$
 
 Windows:
 ```
