@@ -43,7 +43,7 @@ int main() {
         adj[u].push_back(v);
     }
 
-    vector<int> visited_time(N + 1, INT_MAX), lowest_vis_time(N + 1, INT_MAX);
+    vector<int> visited_time(N + 1, -1), lowest_vis_time(N + 1, INT_MAX);
     stack<int> stk;
     vector<bool> stackMember(N + 1);
     
