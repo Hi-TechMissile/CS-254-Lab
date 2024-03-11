@@ -41,7 +41,7 @@ void DFS(vector<vector<int>>& adj, int u, vector<bool>& visited, vector<int>& vi
 }
 
 int main() {
-    // freopen("input5.txt", "r", stdin);
+    freopen("input5.txt", "r", stdin);
 
     int N, M;
     cin >> N >> M;
