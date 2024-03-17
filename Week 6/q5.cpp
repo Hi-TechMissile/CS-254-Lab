@@ -1,6 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+vector<int> ap;
+vector<pair<int, int>> br;
+
 // A recursive function that finds if articulation points and bridges exist using DFS traversal
 void DFS(vector<vector<int>>& adj, int u, vector<bool>& visited, vector<int>& visited_time, vector<int>& lowest_vis_time, int& time, int parent, bool& articulation_point, bool& bridge) {
 	int children = 0;
@@ -13,16 +16,18 @@ void DFS(vector<vector<int>>& adj, int u, vector<bool>& visited, vector<int>& vi
 	for (auto v : adj[u]) {
 		if (!visited[v]) {
 			children++;
-            if (!articulation_point || !bridge) {
+            // if (!articulation_point || !bridge) {
                 DFS(adj, v, visited, visited_time, lowest_vis_time, time, u, articulation_point, bridge);
-            }
+            // }
 
 			lowest_vis_time[u] = min(lowest_vis_time[u], lowest_vis_time[v]);
 			if (parent > 0 && lowest_vis_time[v] >= visited_time[u]) {
 				articulation_point = true;
+                ap.push_back(u);
             }
             
             if (lowest_vis_time[v] > visited_time[u]) {
+                br.push_back({u, v});
                 bridge = true;
             }
 		}
@@ -41,7 +46,7 @@ void DFS(vector<vector<int>>& adj, int u, vector<bool>& visited, vector<int>& vi
 }
 
 int main() {
-    freopen("input5.txt", "r", stdin);
+    // freopen("input5.txt", "r", stdin);
 
     int N, M;
     cin >> N >> M;
@@ -71,5 +76,12 @@ int main() {
     }
     
     cout << "\n";
+
+    for (auto& i : ap)
+        cout << i << " ";
+    cout <<"\n";
+
+    for (auto& [x, y] : br)
+        cout << x << " " << y << "\n";
 	return 0;
 }
