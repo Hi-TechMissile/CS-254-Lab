@@ -57,16 +57,24 @@ vector<int> jobScheduling(vector<Job>& arr, int n) {
 */
 
 int main() {
-    int n;
-    cin >> n;
+    // file IO
+    freopen("input2.txt", "r", stdin);
+    int tt;
+    cin >> tt;
+    const int T = tt;
+    while (tt--) {
+        cout << "TEST #" << T - tt << ":\n\n";
+        int n;
+        cin >> n;
 
-    vector<Job> v(n);
-    for (int i = 0; i < n; ++i) {
-        cin >> v[i].job_id >> v[i].deadline >> v[i].profit;
+        vector<Job> v(n);
+        for (int i = 0; i < n; ++i) {
+            cin >> v[i].job_id >> v[i].deadline >> v[i].profit;
+        }
+
+        vector<int> ans(jobScheduling(v, n));
+        int job_count = *ans.begin(), max_profit = ans.back();
+        cout << "\nThe maximum profit obtainable is " << max_profit << " by completing " << job_count << " jobs.\n\n";
     }
-
-    vector<int> ans(jobScheduling(v, n));
-    int job_count = *ans.begin(), max_profit = ans.back();
-    cout << "\nThe maximum profit obtainable is " << max_profit << " by completing " << job_count << " jobs.\n\n";
     return 0;
 }

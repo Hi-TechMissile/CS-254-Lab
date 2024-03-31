@@ -75,18 +75,27 @@ i64 dpKnapsack(vector<int>& w, vector<int>& v, int& W) {
 /***********************************************************************************/
 
 int main() {
-    int n, weight_limit;
-    cin >> n >> weight_limit;
-    vector<int> weights(n), values(n);
-    for (int& w : weights) {
-        cin >> w;
-    }
+    // file IO
+    freopen("input1.txt", "r", stdin);
+    
+    int tt;
+    cin >> tt;
+    const int T = tt;
+    while (tt--) {
+        cout << "TEST #" << T - tt << ":\n\n";
+        int n, weight_limit;
+        cin >> n >> weight_limit;
+        vector<int> weights(n), values(n);
+        for (int& w : weights) {
+            cin >> w;
+        }
 
-    for (int& v : values) {
-        cin >> v;
-    }
+        for (int& v : values) {
+            cin >> v;
+        }
 
-    cout << "\nThe maximum total cost as obtained by the greedy approach is " << greedyKnapsack(weights, values, weight_limit) << ".\n";
-    cout << "The maximum total cost as obtained by an optimal dynamic programming approach is " << dpKnapsack(weights, values, weight_limit) << ".\n";
+        cout << "\nThe maximum total cost as obtained by the greedy approach is " << greedyKnapsack(weights, values, weight_limit) << ".\n";
+        cout << "The maximum total cost as obtained by an optimal dynamic programming approach is " << dpKnapsack(weights, values, weight_limit) << ".\n";
+    }
     return 0;
 }
